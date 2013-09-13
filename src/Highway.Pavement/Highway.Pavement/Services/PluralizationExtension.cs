@@ -5,22 +5,12 @@ namespace Highway.Pavement.Services
 {
     public static class Formatting
     {
-        private static readonly IList<string> Unpluralizables = new List<string> { "equipment", "information", "rice", "money", "species", "series", "fish", "sheep", "deer" };
-        private static readonly IDictionary<string, string> Pluralizations = new Dictionary<string, string>
+        private static IList<string> NonPluralizables = new List<string> { "equipment", "information", "rice", "money", "species", "series", "fish", "sheep", "deer" };
+        private static IDictionary<string, string> Pluralizations = new Dictionary<string, string>
         {
-            // Start with the rarest cases, and move to the most common
-            { "person", "people" },
-            { "ox", "oxen" },
-            { "child", "children" },
-            { "foot", "feet" },
-            { "tooth", "teeth" },
-            { "goose", "geese" },
-            { "dogma", "dogmata"},
-            { "schema", "schemata"},
-            // And now the more standard rules.
             { "(.*)fe?", "$1ves" },         // ie, wolf, wife
-            { "(.*)man$", "$1men" },
-            { "(.+[aeiou]y)$", "$1s" },
+            { "(.*)man$", "$1men" },        // ie, workman, workmen
+            { "(.+[aeiou]y)$", "$1s" },     
             { "(.+[^aeiou])y$", "$1ies" },
             { "(.+z)$", "$1zes" },
             { "([m|l])ouse$", "$1ice" },
@@ -30,9 +20,56 @@ namespace Highway.Pavement.Services
             { "(.+)", @"$1s" }
         };
 
+        private static IDictionary<string, string> SpecificCases = new Dictionary<string, string>()
+        {
+            { "person", "people" },
+            { "ox", "oxen" },
+            { "child", "children" },
+            { "foot", "feet" },
+            { "tooth", "teeth" },
+            { "goose", "geese" },
+            { "dogma", "dogmata"},
+            { "schema", "schemata"},
+        };
+
+        public static void AddPluralization(string singular, string plural)
+        {
+            if (SpecificCases.ContainsKey(singular))
+            {
+                SpecificCases[singular] = plural;
+            }
+            else
+            {
+                SpecificCases.Add(new KeyValuePair<string, string>(singular, plural));
+            }
+        }
+
+        public static void AddPluralizationPattern(string singularPattern, string pluralPattern)
+        {
+            if (SpecificCases.ContainsKey(singularPattern))
+            {
+                SpecificCases[singularPattern] = pluralPattern;
+            }
+            else
+            {
+                SpecificCases.Add(new KeyValuePair<string, string>(singularPattern, pluralPattern));
+            }
+        }
+
+        public static void AddNonPluralizable(string singular)
+        {
+            if (NonPluralizables.Contains(singular)) return;
+            NonPluralizables.Add(singular);
+        }
+
         public static string Pluralize(this string singular)
         {
-            if (Unpluralizables.Contains(singular))
+            if (SpecificCases.ContainsKey(singular))
+            {
+                return SpecificCases[singular];
+            }
+
+            if (NonPluralizables.Contains(singular))
                 return singular;
 
             var plural = "";
