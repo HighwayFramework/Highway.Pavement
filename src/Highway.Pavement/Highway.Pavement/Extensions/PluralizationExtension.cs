@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Highway.Pavement.Services
+namespace Highway.Pavement
 {
     public static class Formatting
     {

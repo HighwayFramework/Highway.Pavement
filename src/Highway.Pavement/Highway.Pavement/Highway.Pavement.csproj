@@ -47,11 +47,11 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="IntExtensions\DateTimeForIntExtensions.cs" />
-    <Compile Include="LoggerExtensions.cs" />
+    <Compile Include="Extensions\DateTimeForIntExtensions.cs" />
+    <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PluralizationExtension.cs" />
-    <Compile Include="StringExtensions\Extensions.cs" />
+    <Compile Include="Extensions\PluralizationExtension.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
