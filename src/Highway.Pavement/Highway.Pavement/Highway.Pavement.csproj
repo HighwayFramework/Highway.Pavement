@@ -47,6 +47,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Collections\ConcurrentList.cs" />
     <Compile Include="Extensions\DateTimeForIntExtensions.cs" />
     <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
