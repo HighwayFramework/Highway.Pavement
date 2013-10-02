@@ -33,7 +33,10 @@ task pack-all -depends nuget-clean{
 task push-all -depends nuget-clean {
     create-packs
     Get-ChildItem -Path .\pack\*.nupkg |
-        %{ push-nuget $_; mv $_ .\nuget\ }
+        %{ 
+            push-nuget $_
+            mv $_ .\nuget\.
+        }
     rm .\pack -Recurse -Force
 }
 
