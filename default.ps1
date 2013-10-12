@@ -2,6 +2,7 @@ Framework "4.0"
 
 properties {
     $build_config = "Release"
+    $solution_info_path = ".\src\Highway.Pavement\SolutionInfo.cs"
     $pack_dir = ".\pack"
     $build_archive = ".\buildarchive"
     $version_number = "0.3.0.0"
@@ -32,7 +33,7 @@ task test-all -depends clean-buildarchive, Clean-TestResults {
     }
 }
 
-task build-all {
+task build-all -depends Update-Version {
     rebuild .\src\Highway.Pavement\Highway.Pavement.sln
 }
 
@@ -42,7 +43,7 @@ task pack-ci -depends clean-buildarchive, pack-all -precondition { Test-IsCI } {
     } 
 }
 
-task pack-all -depends clean-nuget {
+task pack-all -depends Update-Version, clean-nuget -precondition { Test-PackageDoesNotExist } {
 	pack-nuget .\src\Highway.Pavement\Highway.Pavement\Highway.Pavement.csproj
 }
 
@@ -66,6 +67,24 @@ task clean-nuget {
 
 task clean-testresults {
     Reset-Directory .\TestResults
+}
+
+task Update-Version {
+    $solution_info = Get-Content $solution_info_path
+    $solution_info = $solution_info -replace 'Version\(".+"\)', "Version(`"$version_number`")"
+    $solution_info = $solution_info -replace 'AssemblyFileVersion\(".+"\)', "AssemblyFileVersion(`"$nuget_version_number`")"
+    $solution_info = $solution_info -replace 'AssemblyInformationalVersion\(".+"\)', "AssemblyInformationalVersion(`"$nuget_version_number`")"
+    Set-Content -Path $solution_info_path -Value $solution_info
+    if (Test-ModifiedInGIT .\Highway\SolutionInfo.cs) {
+        Write-Warning "SolutionInfo.cs changed, most likely updating to a new version"
+    }
+
+    # Also update the NUSPEC files, replacing $version$ since it doesn't auto-register Pre-Release builds
+    ls src\**\*.nuspec -Recurse | % {
+        $nuspec = gc $_
+        $nuspec = $nuspec -replace '\$version\$', $nuget_version_number
+        $nuspec
+    }
 }
 
 ##########################################################################################

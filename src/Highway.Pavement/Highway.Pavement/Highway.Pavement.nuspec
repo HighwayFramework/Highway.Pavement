@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://hwyfwk.com/license.html</licenseUrl>
+    <projectUrl>http://hwyfwk.com/projects/pavement</projectUrl>
+    <iconUrl>http://hwyfwk.com/images/Highway.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release notes can be found at http://hwyfwk.com/releases.html</releaseNotes>
+    <copyright>Copyright 2013 Devlin Liles and Tim Rayburn</copyright>
+    <tags>Highway Pavement</tags>
+  </metadata>
+</package>
