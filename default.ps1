@@ -5,7 +5,7 @@ properties {
     $solution_info_path = ".\src\Highway.Pavement\SolutionInfo.cs"
     $pack_dir = ".\pack"
     $build_archive = ".\buildarchive"
-    $version_number = "0.3.0.0"
+    $version_number = "0.4.0.0"
     $nuget_version_number = $version_number
     if ($Env:BUILD_NUMBER -ne $null) {
         $nuget_version_number += "-$Env:BUILD_NUMBER"
