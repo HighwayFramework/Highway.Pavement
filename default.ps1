@@ -56,7 +56,7 @@ task push-all -depends pack-all, clean-nuget {
 }
 
 
-task clean_buildarchive {
+task clean-buildarchive {
     Reset-Directory $build_archive
 }
 
