@@ -15,6 +15,7 @@ lib/golden_cap.zip
 *.cache
 packages
 TestResults
+buildarchive
 
 *.ncrunchsolution
 _NCrunch_Highway
