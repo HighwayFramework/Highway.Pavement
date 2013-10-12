@@ -13,7 +13,7 @@ properties {
 
 task default -depends build
 task build -depends build-all
-task test -depends build-all, test-all
+task test -depends build-all, test-all, pack-ci
 task pack -depends pack-all
 task push -depends push-all
 
@@ -34,6 +34,12 @@ task test-all -depends clean_buildarchive, Clean-TestResults {
 
 task build-all {
     rebuild .\src\Highway.Pavement\Highway.Pavement.sln
+}
+
+task pack-ci -depends clean-buildarchive, pack-all -precondition { Test-IsCI } {
+    dir -Path "$pack_dir\*.nupkg" | % { 
+        cp $_ $build_archive
+    } 
 }
 
 task pack-all -depends clean-nuget {
