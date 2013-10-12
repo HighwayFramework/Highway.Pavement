@@ -75,15 +75,8 @@ task Update-Version {
     $solution_info = $solution_info -replace 'AssemblyFileVersion\(".+"\)', "AssemblyFileVersion(`"$nuget_version_number`")"
     $solution_info = $solution_info -replace 'AssemblyInformationalVersion\(".+"\)', "AssemblyInformationalVersion(`"$nuget_version_number`")"
     Set-Content -Path $solution_info_path -Value $solution_info
-    if (Test-ModifiedInGIT .\Highway\SolutionInfo.cs) {
+    if (Test-ModifiedInGIT $solution_info_path) {
         Write-Warning "SolutionInfo.cs changed, most likely updating to a new version"
-    }
-
-    # Also update the NUSPEC files, replacing $version$ since it doesn't auto-register Pre-Release builds
-    ls src\**\*.nuspec -Recurse | % {
-        $nuspec = gc $_
-        $nuspec = $nuspec -replace '\$version\$', $nuget_version_number
-        $nuspec
     }
 }
 

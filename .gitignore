@@ -14,6 +14,7 @@ lib/golden_cap.zip
 *.orig
 *.cache
 packages
+/pack
 TestResults
 buildarchive
 
