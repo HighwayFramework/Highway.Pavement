@@ -43,7 +43,7 @@ task pack-ci -depends clean-buildarchive, pack-all -precondition { Test-IsCI } {
     } 
 }
 
-task pack-all -depends Update-Version, clean-nuget -precondition { Test-PackageDoesNotExist } {
+task pack-all -depends Update-Version, clean-nuget {
 	pack-nuget .\src\Highway.Pavement\Highway.Pavement\Highway.Pavement.csproj
 }
 
