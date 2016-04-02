@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0-*",
+  "version": "0.5.0-*",
   "description": "Highway.Pavement Class Library",
   "authors": [ "Tim Rayburn", "Devlin Liles" ],
   "tags": [ "Highway", "HwyFwk", "HwyFwk.com", "Highway.Pavement" ],
@@ -9,6 +9,11 @@
   "title": "Highway.Pavement Class Library",
   "tooling": {
     "defaultNamespace": "Highway.Pavement"
+  },
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "keyFile": "../../Highway.snk",
+    "xmlDoc": true
   },
   "dependencies": {
   },
