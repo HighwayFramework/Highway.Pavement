@@ -97,6 +97,20 @@ Task("Test")
 {
     StartProcess(dnx, @"--project .\test\Highway.Pavement.Tests test");
 });
+
+Task("Pack")
+    .IsDependentOn("Test")
+    .Does(() =>
+{
+    var settings = new DNUPackSettings
+    {
+        Configurations = new[] { configuration },
+        Quiet = true
+    };
+
+    DNUPack("./src/*", settings);
+    CopyFiles("./src/**/*.nupkg", "./nuget");
+});
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
 ///////////////////////////////////////////////////////////////////////////////
