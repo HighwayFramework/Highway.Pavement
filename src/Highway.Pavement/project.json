@@ -1,0 +1,30 @@
+{
+  "version": "0.4.0-*",
+  "description": "Highway.Pavement Class Library",
+  "authors": [ "Tim Rayburn", "Devlin Liles" ],
+  "tags": [ "Highway", "HwyFwk", "HwyFwk.com", "Highway.Pavement" ],
+  "projectUrl": "http://hwyfwk.com/",
+  "licenseUrl": "https://github.com/HighwayFramework/Highway.Pavement/blob/master/LICENSE",
+  "copyright": "Copyright Devlin Liles 2012",
+  "title": "Highway.Pavement Class Library",
+  "tooling": {
+    "defaultNamespace": "Highway.Pavement"
+  },
+  "dependencies": {
+  },
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Collections.Concurrent": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Linq.Queryable": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516",
+        "System.Text.RegularExpressions": "4.0.11-beta-23516"
+      }
+    }
+  }
+}
